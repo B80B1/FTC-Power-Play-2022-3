@@ -7,3 +7,39 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+@autonomous(name = "PrimaAuto")
+public class PrimaAuto extends LinearOpMode {
+  private DcMotor FLmotor = null;
+  private DcMotor FRmotor = null;
+  private DcMotor BLmotor = null;
+  private DCMotor BRmotor = null;
+  private BNO055IMU imu;
+  
+  @Override
+  public void runOpMode() {
+    FLmotor = hardwareMap.get(DcMotor.class, "front left");
+    FRmotor = hardwareMap.get(DcMotor.class, "front right");
+    BLmotor = hardwareMap.get(DcMotor.class, "back left");
+    BRmotor = hardwareMap.get(DcMotor.class, "back right");
+    
+    //run off encoders
+    FLmotor.setMode(DcMotor(DcMotor.RunMode.RUN_TO_POSITION)
+    FRmotor.setMode(DcMotor(DcMotor.RunMode.RUN_TO_POSITION)
+    BLmotor.setMode(DcMotor(DcMotor.RunMode.RUN_TO_POSITION)
+    BRmotor.setMode(DcMotor(DcMotor.RunMode.RUN_TO_POSITION)
+    
+    //set wheel direction
+    FLmotor.setDirection(DcMotorSimple.Direction.FORWARD);
+    FRmotor.setDirection(DcMotorSimple.Direction.REVERSE);
+    BLmotor.setDirection(DcMotorSimple.Direction.FORWARD);
+    BRmotor.setDirection(DcMotorSimple.Direction.REVERSE);
+    
+    //set zero power behavior
+    FLmotor.setZeroPowerBehavior(ZeroPowerBehavior.BRAKE);
+    FRmotor.setZeroPowerBehavior(ZeroPowerBehavior.BRAKE);
+    BLmotor.setZeroPowerBehavior(ZeroPowerBehavior.BRAKE);
+    BRmotor.setZeroPowerBehavior(ZeroPowerBehavior.BRAKE);
+    
+    BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+    
+    parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
