@@ -1,0 +1,92 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+@Autonomous(name = "Auto")
+public class Auto extends LinearOpMode {
+ private DcMotor FLmotor = null;
+ private DcMotor FRmotor = null;
+ private DcMotor BLmotor = null;
+ private DcMotor BRmotor = null;
+ private CRServo Arm = null;
+ 
+ 
+ private int servoPos;
+ private int FLPos;
+ private int FRPos;
+ private int BLPos;
+ private int BRPos;
+ 
+ @Override
+ public void runOpMode() {
+    FLmotor = hardwareMap.get(DcMotor.class, "front left");
+    FRmotor = hardwareMap.get(DcMotor.class, "front right");
+    BLmotor = hardwareMap.get(DcMotor.class, "back left");
+    BRmotor = hardwareMap.get(DcMotor.class, "back right");
+    Arm = hardwareMap.get(CRServo.class, "servo2");
+    
+    FLmotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    FRmotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    BLmotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    BRmotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    
+    FLmotor.setDirection(DcMotorSimple.Direction.FORWARD);
+    FRmotor.setDirection(DcMotorSimple.Direction.REVERSE);
+    BLmotor.setDirection(DcMotorSimple.Direction.FORWARD);
+    BRmotor.setDirection(DcMotorSimple.Direction.REVERSE);
+    
+    servoPos = 0;
+    
+    FLPos = 0;
+    FRPos = 0;
+    BLPos = 0;
+    BRPos = 0;
+    waitForStart();
+    
+    drive(1000, 1000, 0.25);
+    drive(1000, -1000, 0.25);
+     
+ 
+ 
+      
+    
+}
+  
+  private void drive ( int leftTarget, int rightTarget, double speed){
+    FLPos += leftTarget; 
+     FRPos += rightTarget;
+      BLPos += leftTarget;
+       BRPos += rightTarget; 
+       
+       FLmotor.setTargetPosition(FLPos);
+       BLmotor.setTargetPosition(BLPos);
+       FRmotor.setTargetPosition(FRPos);
+       BRmotor.setTargetPosition(BRPos);
+       
+      FLmotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+      BLmotor.setMode(DcMotor.RunMode.RUN_TO_POSITION); 
+      FRmotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+      BRmotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+       
+       FLmotor.setPower(speed);
+       BLmotor.setPower(speed);
+       FRmotor.setPower(speed);
+       BRmotor.setPower(speed);
+       
+       
+       
+       
+       while(opModeIsActive() && FLmotor.isBusy() && FRmotor.isBusy() && BLmotor.isBusy() && BRmotor.isBusy()){
+        idle();
+        
+     }
+   }
+ }
+  
+  
+  
