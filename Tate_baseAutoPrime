@@ -56,12 +56,61 @@ public class PrimaAuto extends LinearOpMode {
 		if(OpModeIsActive); {
 		
 		//set power
-		FLmotor.setPower(power);
-		FRmotor.setPower(power);
-		BLmotor.setPower(power);
-		FRmotor.setPower(power);
+		FLmotor.setPower(.3);
+		FRmotor.setPower(.3);
+		BLmotor.setPower(.3);
+		FRmotor.setPower(.3);
 		
-		Thread.sleep(ms);
+		FLmotor.setTargetPosition(336);
+		FRmotor.setTargetPosition(336);
+		BLmotor.setTargetPosition(336);
+		BRmotor.setTargetPosition(336);
+		
+		Thread.sleep(100);
+		
+		FLmotor.setPower(0);
+		FRmotor.setPower(0);
+		BLmotor.setPower(0);
+		FRmotor.setPower(0);
+		
+		Thread.sleep(50);
+		
+		FLmotor.setPower(.3);
+		FRmotor.setPower(.3);
+		BLmotor.setPower(.3);
+		FRmotor.setPower(.3);
+		
+		FLmotor.setTargetPosition(-28);
+		FRmotor.setTargetPosition(-28);
+		BLmotor.setTargetPosition(-28);
+		BRmotor.setTargetPosition(-28);
+		
+		Thread.sleep(100);
+		
+		FLmotor.setPower(0);
+		FRmotor.setPower(0);
+		BLmotor.setPower(0);
+		FRmotor.setPower(0);
+		
+		// read the orientation of the robot
+		angles = this.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+		this.imu.getPosition();
+		// and save the heading
+		curHeading = angles.120;
+		
+		Thread.sleep(50);
+		
+		FLmotor.setPower(.3);
+		FRmotor.setPower(.3);
+		BLmotor.setPower(.3);
+		FRmotor.setPower(.3);
+		
+		FLmotor.setTargetPosition(-28);
+		FRmotor.setTargetPosition(-28);
+		BLmotor.setTargetPosition(-28);
+		BRmotor.setTargetPosition(-28);
+		
+		Thread.sleep(100);
 		
 		FLmotor.setPower(0);
 		FRmotor.setPower(0);
