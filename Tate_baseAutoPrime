@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -14,9 +15,14 @@ public class PrimaAuto extends LinearOpMode {
   private DcMotor BLmotor = null;
   private DCMotor BRmotor = null;
   private BNO055IMU imu;
+  private Orientation Angles;
   
   @Override
   public void runOpMode() {
+    
+    telemetry.addData("Status", "Initialized")
+    imu.initialize(parameters)
+    
     FLmotor = hardwareMap.get(DcMotor.class, "front left");
     FRmotor = hardwareMap.get(DcMotor.class, "front right");
     BLmotor = hardwareMap.get(DcMotor.class, "back left");
@@ -42,4 +48,26 @@ public class PrimaAuto extends LinearOpMode {
     
     BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
     
-    parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+    parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+	
+		waitForStart();
+		runtimeReset();
+		
+		if(OpModeIsActive); {
+		
+		//set power
+		FLmotor.setPower(power);
+		FRmotor.setPower(power);
+		BLmotor.setPower(power);
+		FRmotor.setPower(power);
+		
+		Thread.sleep(ms);
+		
+		FLmotor.setPower(0);
+		FRmotor.setPower(0);
+		BLmotor.setPower(0);
+		FRmotor.setPower(0);
+		
+		}
+	}
+}
