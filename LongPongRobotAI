@@ -1,0 +1,39 @@
+@Autonomous(name=longboi)
+public class Longpongrobot extends LinearOpMode
+// Motors on robot
+private DCmotor motorright=null;
+private DCmotor motorleft=null;
+private DCmotor motorbackright=null;
+private DCmotor motorbackleft=null;
+// Slide
+private DCmotor slideleft=null;
+private DCmotor slideright=null;
+
+@Override
+public void runOpMode() {
+ // mapping
+slideleft = hardwareMap.get(DcMotor.class, "slideleft");
+slideright = hardwareMap.get(DcMotor.class, "slideright");
+motorright = hardwareMap.get(DcMotor.class, "motorleft");
+motorleft = hardwareMap.get(DcMotor.class, "motorright");
+motorbackright = hardwareMap.get(DcMotor.class, "motorbackleftt");
+motorbackleft = hardwareMap.get(DcMotor.class, "motorbackright");
+
+waitforstart();
+if (opmodeisactive()){
+
+rightTarget = motorright.getCurrentPosition() + (int)(30 * DRIVE_COUNTS_PER_IN);
+rightTarget = motorbackright.getCurrentPosition() + (int)(30 * DRIVE_COUNTS_PER_IN);
+leftTarget = motorleft.getCurrentPosition() + (int)(15 * DRIVE_COUNTS_PER_IN);
+leftTarget = motorbackleft.getCurrentPosition() + (int)(15 * DRIVE_COUNTS_PER_IN);
+
+motorleft.setpower(0.7)
+      
+
+      
+      
+
+
+
+
+
