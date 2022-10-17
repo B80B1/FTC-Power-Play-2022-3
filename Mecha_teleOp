@@ -7,6 +7,10 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
+import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.Blinker;
 
 
 @TeleOp(name = "Mech")
@@ -47,6 +51,11 @@ public class MechaTeleOp extends LinearOpMode {
 
         while (opModeIsActive()) {
             
+            telemetry.addData("Status", "Active");
+            telemetry.update();
+        
+            Blinker.setConstant(int Red);
+        
             double forwardMotion;
             double horizonMotion;
             double rotateMotion;
