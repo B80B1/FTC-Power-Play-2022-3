@@ -54,8 +54,6 @@ public class MechaTeleOp extends LinearOpMode {
             telemetry.addData("Status", "Active");
             telemetry.update();
         
-            Blinker.setConstant(int Red);
-        
             double forwardMotion;
             double horizonMotion;
             double rotateMotion;
