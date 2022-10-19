@@ -27,7 +27,11 @@ rightTarget = motorbackright.getCurrentPosition() + (int)(30 * DRIVE_COUNTS_PER_
 leftTarget = motorleft.getCurrentPosition() + (int)(15 * DRIVE_COUNTS_PER_IN);
 leftTarget = motorbackleft.getCurrentPosition() + (int)(15 * DRIVE_COUNTS_PER_IN);
 
-motorleft.setpower(0.7)
+motorleft.setpower(0.7) 
+motorbackleft.setpower(0.7)
+motorbackright.setpower(0.7)
+motorright.setpower(0.7)
+
       
 
       
