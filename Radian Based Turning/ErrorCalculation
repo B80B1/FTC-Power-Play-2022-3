@@ -1,0 +1,1 @@
+Math.toDegrees(angleWrap(Math.toRadians(359 - 1)));
