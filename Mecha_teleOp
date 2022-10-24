@@ -23,12 +23,9 @@ public class MechaTeleOp extends LinearOpMode {
     private DcMotor motor4 = null;
     private DcMotor motor5 = null; //slide control right
     private DcMotor motor6 = null; //slide control left
-    // private CRServo CRR = null;
-    // private CRServo CRL = null;
+    private CRServo CRR = null;
+    private CRServo CRL = null;
     
-    /*
-        
-    */
     @Override
     public void runOpMode() {
         
@@ -41,26 +38,19 @@ public class MechaTeleOp extends LinearOpMode {
         motor4 = hardwareMap.get(DcMotor.class,"back right");  //backright, port 2
         motor5 = hardwareMap.get(DcMotor.class, "slide right");
         motor6 = hardwareMap.get(DcMotor.class, "slide left");
-        //motor7 = hardwareMap.get(DcMotor.class, "flip 1");
-        //motor8 = hardwareMap.get(DcMotor.class, "spin 1");
-        // CRR = hardwareMap.get(CRServo.class, "CR1");
-        // CRL = hardwareMap.get(CRServo.class, "CR2");
+        CRR = hardwareMap.get(CRServo.class, "right claw");
+        CRL = hardwareMap.get(CRServo.class, "left claw");
         
         
         motor1.setDirection(DcMotor.Direction.FORWARD);
         motor2.setDirection(DcMotor.Direction.REVERSE);
         motor3.setDirection(DcMotor.Direction.FORWARD);
         motor4.setDirection(DcMotor.Direction.REVERSE);
-        //motor7.setDirection(DcMotor.RunMode.RUN_USING_ENCODER);
         
         waitForStart();
 
         while (opModeIsActive()) {
             
-            telemetry.addData("Status", "Active");
-            telemetry.update();
-        
-
             double forwardMotion;
             double horizonMotion;
             double rotateMotion;
@@ -74,23 +64,30 @@ public class MechaTeleOp extends LinearOpMode {
             double m2Power = (forwardMotion + horizonMotion - rotateMotion) / denominator;
             double m3Power = (forwardMotion - horizonMotion + rotateMotion) / denominator;
             double m4Power = (forwardMotion - horizonMotion - rotateMotion) / denominator;
-            double m5Power = gamepad2.right_stick_y/2;
-            double m6Power = -gamepad2.right_stick_y/2;
+            double m5Power = gamepad2.right_stick_y;
+            double m6Power = -gamepad2.right_stick_y;
             
-            motor1.setPower(m1Power);
-            motor2.setPower(m2Power);
-            motor3.setPower(m3Power);
-            motor4.setPower(m4Power);
+            motor1.setPower(m1Power/2);
+            motor2.setPower(m2Power/2);
+            motor3.setPower(m3Power/2);
+            motor4.setPower(m4Power/2);
             motor5.setPower(m5Power);
             motor6.setPower(m6Power);
             
-            /*
-            if (gamepad2.right_bumper) {
-                
-            } else if (gamepad2.left_bumper) {
-                
+            if (gamepad2.a) {
+                CRR.setPower(1);
+                CRL.setPower(-1);
+            } else if (gamepad2.b) {
+                CRR.setPower(-1);
+                CRL.setPower(1);
+            } else if (gamepad2.x) {
+                CRR.setPower(0.1);
+                CRL.setPower(-0.1);
+            }  else {
+                CRR.setPower(0);
+                CRL.setPower(0);
             }
-            */
+            
             
             telemetry.addData("m1:", m1Power);            
             telemetry.addData("m2:", m2Power);
@@ -101,7 +98,9 @@ public class MechaTeleOp extends LinearOpMode {
             telemetry.addData("FM:", forwardMotion);
             telemetry.addData("HM:", horizonMotion);
             telemetry.addData("RM:", rotateMotion);
-            telemetry.addData("Slide Pos:", m5Power+m6Power/2);
+            telemetry.addData("CRR:", CRR);
+            telemetry.addData("CRL:", CRL);
+            telemetry.addData("Slide Pos:", m6Power+m5Power);
             telemetry.addData("Status", "Running");
             telemetry.update();
 
